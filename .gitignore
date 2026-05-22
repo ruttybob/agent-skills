@@ -7,3 +7,5 @@ node_modules/
 .claude/sdd-cache/
 evals/results/
 __pycache__/
+
+# Completed spec archives (kept in git but often noisy in diffs
