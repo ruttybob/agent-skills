@@ -12,7 +12,7 @@ Invoke the shipping-and-launch skill.
 
 ## Phase A — Parallel fan-out
 
-Spawn three subagents concurrently. Each persona's prompt is a file in the skill pack's `agents/` directory (for this preset: `~/pets/agent-skills/agents/`) — read `<name>.md` and delegate through the subagent tool with the persona body as the prompt core, plus the change context (staged diff or commit range) and the report template. **Issue all three subagent calls in a single assistant turn so they execute in parallel** — sequential calls defeat the purpose of this command.
+Spawn three subagents concurrently. Each persona's prompt is a file under `agents/` in this skill's own directory — read `agents/<name>.md` from the base directory and delegate through the subagent tool with the persona body as the prompt core, plus the change context (staged diff or commit range) and the report template. **Issue all three subagent calls in a single assistant turn so they execute in parallel** — sequential calls defeat the purpose of this command.
 
 Dispatch each persona:
 
@@ -27,7 +27,7 @@ Constraints:
 - Do not let one persona delegate to another — keep the fan-out flat.
 - For richer multi-agent collaboration where teammates talk to each other instead of just reporting back, see the pack's `references/orchestration-patterns.md`.
 
-The persona files live in your fork — edit them there and `/ship` picks up the changes at run time; nothing to re-register.
+The persona files are the pack's `agents/` mounted into this skill's directory — edit them there and `/ship` picks up the changes at run time; nothing to re-register.
 
 ## Phase B — Merge in main context
 
