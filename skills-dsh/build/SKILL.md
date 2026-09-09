@@ -28,16 +28,16 @@ Claim the next ready ticket (`bd ready --claim`). Then:
 5. Run the full test suite to check for regressions
 6. Run the build to verify compilation
 7. Commit with a descriptive message referencing the ticket id
-8. Close the ticket — `bd close <id> --reason "<commit sha> — what landed"` — and stop
+8. Close the ticket — `bd close <id> --reason "<commit sha> — what landed"` — and stop. When that was the epic's last open ticket, also close the epic and archive its plan: `git mv tasks/plans/<slug>.md tasks/archive/` in a small follow-up `chore:` commit.
 
 ## Autonomous: the whole plan (`/build auto`)
 
 Use this once a spec exists and you want to collapse plan + build into one run. It removes the manual stepping between tasks — not the verification. Every ticket still earns a passing test and its own commit.
 
 1. Require a spec. Look only for a spec at a known path: SPEC.md at the repo root, docs/SPEC.md, or a file under spec/. A README or arbitrary doc does NOT count. If none exists, stop and tell the user to run /spec first — do not invent requirements.
-2. Establish a clean baseline. Run `git status --porcelain`. If there are uncommitted changes outside the expected planning artifacts (SPEC.md, docs/SPEC.md, spec/*, tasks/plan.md), stop and ask the user to commit, stash, or confirm how to handle them. Autonomous per-ticket commits must not absorb unrelated local work, or the clean-rollback guarantee breaks.
-3. Plan if needed. If the spec's epic has no open tickets yet, run /planning to create them (plan.md + tickets).
-4. Single checkpoint. Present the full plan and wait for an unambiguous affirmative (e.g. "approve", "go", "yes"). Treat hedged responses ("looks reasonable", "I guess") as NOT approved. This is the only human gate — after approval, run autonomously. If you generated tasks/plan.md, commit it as a single preparatory commit now so it doesn't bleed into the first ticket's commit.
+2. Establish a clean baseline. Run `git status --porcelain`. If there are uncommitted changes outside the expected planning artifacts (SPEC.md, docs/SPEC.md, spec/*, tasks/plans/*), stop and ask the user to commit, stash, or confirm how to handle them. Autonomous per-ticket commits must not absorb unrelated local work, or the clean-rollback guarantee breaks.
+3. Plan if needed. If the spec's epic has no open tickets yet, run /planning to create them (the epic's plan file + tickets).
+4. Single checkpoint. Present the full plan and wait for an unambiguous affirmative (e.g. "approve", "go", "yes"). Treat hedged responses ("looks reasonable", "I guess") as NOT approved. This is the only human gate — after approval, run autonomously. If you generated plan files, commit them as a single preparatory commit now so it doesn't bleed into the first ticket's commit.
 5. Execute every ticket in dependency order — which is the frontier: claim the next `bd ready` ticket, run the full default loop above (RED → GREEN → regression → build → commit → close), repeat until the frontier is empty. Stage only the files that ticket touched — never `git add -A` blindly — and make one commit per ticket so any point is a clean rollback.
 6. Stop and ask the user (do not push through) when:
    - a test can't be made to pass or the build breaks without an obvious fix → follow the debugging-and-error-recovery skill
