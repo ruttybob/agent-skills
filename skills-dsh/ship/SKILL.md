@@ -12,22 +12,22 @@ Invoke the shipping-and-launch skill.
 
 ## Phase A — Parallel fan-out
 
-Spawn three subagents concurrently. The CLI exposes each custom subagent in `agents/` as a tool with the same name — so `code-reviewer.md` becomes a `code-reviewer` tool the main agent can call, and `@code-reviewer` works as an explicit invocation in the prompt. **Issue all three subagent tool calls in a single assistant turn so they execute in parallel** — sequential calls defeat the purpose of this command.
+Spawn three subagents concurrently. Each persona's prompt is a file in the skill pack's `agents/` directory (for this preset: `~/pets/agent-skills/agents/`) — read `<name>.md` and delegate through the subagent tool with the persona body as the prompt core, plus the change context (staged diff or commit range) and the report template. **Issue all three subagent calls in a single assistant turn so they execute in parallel** — sequential calls defeat the purpose of this command.
 
-Dispatch each persona by tool name:
+Dispatch each persona:
 
-1. **`code-reviewer`** — Run a five-axis review (correctness, readability, architecture, security, performance) on the staged changes or recent commits. Output the standard review template.
-2. **`security-auditor`** — Run a vulnerability and threat-model pass. Check OWASP Top 10, secrets handling, auth/authz, dependency CVEs. Output the standard audit report.
-3. **`test-engineer`** — Analyze test coverage for the change. Identify gaps in happy path, edge cases, error paths, and concurrency scenarios. Output the standard coverage analysis.
+1. **`code-reviewer`** (`agents/code-reviewer.md`) — Run a five-axis review (correctness, readability, architecture, security, performance) on the staged changes or recent commits. Output the standard review template.
+2. **`security-auditor`** (`agents/security-auditor.md`) — Run a vulnerability and threat-model pass. Check OWASP Top 10, secrets handling, auth/authz, dependency CVEs. Output the standard audit report.
+3. **`test-engineer`** (`agents/test-engineer.md`) — Analyze test coverage for the change. Identify gaps in happy path, edge cases, error paths, and concurrency scenarios. Output the standard coverage analysis.
 
-If subagents are unavailable in the current CLI version, invoke each persona's system prompt sequentially in the main context and treat their outputs as if returned in parallel — the merge phase still works.
+If the subagent tool is unavailable, run each persona's prompt sequentially in the main context — the merge phase still works.
 
-Constraints (from CLI's subagent model):
+Constraints:
 - Subagents run in isolated context loops and return only their report to this main session.
 - Do not let one persona delegate to another — keep the fan-out flat.
-- For richer multi-agent collaboration where teammates talk to each other instead of just reporting back, see `references/orchestration-patterns.md`.
+- For richer multi-agent collaboration where teammates talk to each other instead of just reporting back, see the pack's `references/orchestration-patterns.md`.
 
-**Persona resolution.** If you've defined your own `code-reviewer`, `security-auditor`, or `test-engineer` in `agents/` or your global configuration, those take precedence over this plugin's versions — `/ship` picks up your customizations automatically. This is intentional: plugin subagents sit at the bottom of the CLI's scope priority table, so user-level definitions win by design.
+The persona files live in your fork — edit them there and `/ship` picks up the changes at run time; nothing to re-register.
 
 ## Phase B — Merge in main context
 

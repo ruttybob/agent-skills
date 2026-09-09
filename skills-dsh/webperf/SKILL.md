@@ -22,7 +22,7 @@ Quick mode — default when none of the above are available. Scan source code fo
 
 ## Run the audit
 
-Spawn the `web-performance-auditor` subagent (the CLI exposes each custom subagent in `agents/` as a tool with the same name). Pass it explicitly:
+Spawn one subagent through the subagent tool; its prompt core is the pack's `agents/web-performance-auditor.md` (for this preset: `~/pets/agent-skills/agents/`), plus the context below. Pass it explicitly:
 
 - The files, components, or diff under review
 - Any artifact paths (Lighthouse JSON, PSI JSON, CrUX response, trace) or pasted JSON content
