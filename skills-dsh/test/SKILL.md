@@ -20,4 +20,6 @@ For bug fixes (Prove-It pattern):
 4. Confirm the test passes
 5. Run the full test suite for regressions
 
+A bug reported without a ticket gets one first when the repo runs beads (`bug` type, repro steps in the body — see `AGENTS.md` → Issue tracker): the Prove-It test then hangs off a tracked issue, and the fix's commit closes it.
+
 For browser-related issues, also invoke browser-testing-with-devtools to verify with Chrome DevTools MCP.

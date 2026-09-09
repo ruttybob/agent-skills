@@ -19,3 +19,12 @@ Then generate a structured spec covering all six core areas: objective, commands
 If the request bundles several independently testable capabilities, first propose a capability map (module ids, dependency direction, build order) per the skill's Phase 0 and get it approved, then spec each module in dependency order.
 
 Save the spec as SPEC.md in the project root and confirm with the user before proceeding.
+
+## Register in beads
+
+If the repo runs the beads tracker (see `AGENTS.md` → Issue tracker; `bd prime` is the command SSOT), register the approved spec before leaving:
+
+- Each capability-map module becomes one `epic` — a container that will hold its tickets; a single-capability spec gets one epic. Record the spec file's path in the epic body.
+- The spec file stays the SSOT for the *why*; the epic only points at it. Never fork spec content into the tracker.
+
+No tracker → skip this section; the spec file alone is the artifact.

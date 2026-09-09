@@ -18,3 +18,5 @@ Review the current changes (staged or recent commits) across all five axes:
 
 Categorize findings as Critical, Important, or Suggestion.
 Output a structured review with specific file:line references and fix recommendations.
+
+In a repo with beads, file every Critical and Important finding as a ticket — priority mapped from severity (Critical → P1, Important → P2 as the default), file:line and fix in the body — so findings outlive the chat. Suggestions stay in the report.
