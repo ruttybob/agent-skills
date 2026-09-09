@@ -19,7 +19,7 @@ Read the existing spec (SPEC.md or equivalent) and the relevant codebase section
 
 Save the plan to `tasks/plans/<module-slug>.md` — the human-readable artifact: dependency graph, slice rationale, checkpoints. One file per epic — the capability-map module id, or a short slug for a single-capability spec — so parallel epics never fight over one plan.
 
-The **task ledger lives in beads** (conventions in `AGENTS.md` → Issue tracker; `bd prime` is the command SSOT; the base skill's External tracker branch is the rule): one issue per task — type per the repo's type table, acceptance criteria and verify steps in the body, parented under the spec's epic, blockers wired with `bd dep add` so the frontier (`bd ready`) *is* the execution order. Do not also write `tasks/todo.md` — one ledger, or tasks scatter.
+The **task ledger lives in beads** (conventions in `AGENTS.md` → Issue tracker; `bd prime` is the command SSOT; the base skill's External tracker branch is the rule): one issue per task — type per the repo's type table, acceptance criteria and verify steps in the body, parented under the spec's epic, blockers wired with `bd dep add` so the frontier (`bd ready`) *is* the build order. Do not also write `tasks/todo.md` — one ledger, or tasks scatter.
 
 No tracker (`bd prime` fails) → fall back to the base skill's default `tasks/todo.md`.
 
@@ -27,5 +27,5 @@ No tracker (`bd prime` fails) → fall back to the base skill's default `tasks/t
 
 - Open tickets under this epic and a plan file already on disk → the cycle is mid-flight: stop and ask, never silently overwrite an incomplete plan.
 - Re-planning a finished epic → archive the old plan first (`git mv tasks/plans/<module-slug>.md tasks/archive/<module-slug>.md`), then write the new one. Git history is the real archive; the rename keeps past plans browsable.
-- Nothing is lost when the plan goes: the *why* stays in the spec, the *what's-left* in bd.
+- Nothing is lost when the plan goes: the *why* stays in the spec, the *what's-left* in bd. (/build archives the plan when it closes an epic's last ticket.)
 - Legacy layout: an old single `tasks/plan.md` moves to `tasks/plans/<module-slug>.md` the next time it is touched.
