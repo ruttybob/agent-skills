@@ -1,17 +1,17 @@
 ---
-name: setup-bd
+name: setup-addy
 disable-model-invocation: true
-description: "Initialize the beads (bd) issue tracker in this repo: the AGENTS.md sections + docs/agents/issue-tracker.md, per the established convention. Use when the user explicitly invokes /setup-bd."
+description: "Initialize the beads (bd) issue tracker in this repo: the AGENTS.md sections + docs/agents/issue-tracker.md, per the established convention. Use when the user explicitly invokes /setup-addy."
 ---
 
-# /setup-bd
+# /setup-addy
 
 Initialize the repo's beads records: two short sections in `AGENTS.md` plus `docs/agents/issue-tracker.md`. Precedent to mirror: `~/pets/ybg` (`AGENTS.md` → Issue tracker / Persistent memory, `docs/agents/issue-tracker.md`).
 
 Two rules hold the design together:
 
 - **`bd prime` is the command SSOT** — the doc caches no CLI reference, only what the environment does not confess: recorded values, flow conventions, memory rules.
-- **Narrow ownership** — `/setup-bd` owns exactly `docs/agents/issue-tracker.md` and the two AGENTS.md sections it writes. Other AGENTS.md content and other docs are off-limits. A repo-specific tracker fact discovered later (a second store, a related repo) is **bd memory** (`bd remember`), never a doc edit.
+- **Narrow ownership** — `/setup-addy` owns exactly `docs/agents/issue-tracker.md` and the two AGENTS.md sections it writes. Other AGENTS.md content and other docs are off-limits. A repo-specific tracker fact discovered later (a second store, a related repo) is **bd memory** (`bd remember`), never a doc edit.
 
 ## 1. Detect current state (read-only first)
 
@@ -26,7 +26,7 @@ Fill every value from step 1's findings — a stale recorded value is worse than
 
 - **One-paragraph model** — local beads database in `.beads/`, driven by the `bd` CLI, agent-driven like `gh`; the "commands live in `bd prime`" statement.
 - **Recorded values** — prefix, visibility (committed vs gitignored), sync remote (or "none").
-- **Scope** — flow conventions only; this file is owned by `/setup-bd`; tracker facts belong in bd memory.
+- **Scope** — flow conventions only; this file is owned by `/setup-addy`; tracker facts belong in bd memory.
 - **Memory** — `bd remember` / `bd recall` / `bd memories` / `bd forget`; loading is deliberate; what belongs (unwritten conventions, gotchas, reasons) and what does not (issue state, per-session scratch).
 - **Types** — one type per issue, derived from how the work was born: `epic` (spec container, never claimed), `task`, `bug`, `feature`, `chore` (no spec), `decision`.
 - **Labels** — no taxonomy; the workflow labels only: `needs-info` (parked on the user) and `human` (a person must do it). Readiness is computed, not stamped.
